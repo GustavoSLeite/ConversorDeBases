@@ -22,7 +22,7 @@
         <div id="titulo">
             <h1>Gustavo ´s Machine</h1>
         </div>
-        Número: <input type="text" id="ipt_numero"> <br> <br>
+        Insira um número: <input type="text" id="ipt_numero"> <br> <br>
 
         <h3>Qual a base desse numero?</h3>
 
@@ -42,55 +42,87 @@
 <script>
     function base10() {
         var decimal = Number(ipt_numero.value);
+
+        // Verifica se a entrada é um número válido
+        if (isNaN(decimal)) {
+            div_numero.innerHTML = "<b>Erro: Entrada inválida. Insira um número decimal.</b>";
+            return;
+        }
+
         var binario = decimal.toString(2);
         var octal = decimal.toString(8);
         var hexa = decimal.toString(16);
 
         div_numero.innerHTML = ` 
-        <b> Binario = ${binario} <br>
-        Octal = ${octal} <br>
-        Hexadecimal = ${hexa} </b>
-        `
+    <b> Binario = ${binario} <br>
+    Octal = ${octal} <br>
+    Hexadecimal = ${hexa} </b>
+    `;
     }
+
 
     function base2() {
         var binario = ipt_numero.value;
+
+        // Verifica se a string contém apenas 0s e 1s
+        if (!/^[01]+$/.test(binario)) {
+            div_numero.innerHTML = "<b>Erro: Entrada inválida. Insira um número binário.</b>";
+            return;
+        }
+
         var decimal = parseInt(binario, 2);
         var octal = decimal.toString(8);
         var hexa = decimal.toString(16);
 
         div_numero.innerHTML = `
-        <b> Decimal = ${decimal} <br>
-        Octal = ${octal} <br>
-        Hexadecimal = ${hexa} </b>
-        `
+    <b> Decimal = ${decimal} <br>
+    Octal = ${octal} <br>
+    Hexadecimal = ${hexa} </b>
+    `;
     }
+
 
     function base8() {
         var octal = ipt_numero.value;
+
+        // Verifica se a string contém apenas dígitos de 0 a 7
+        if (!/^[0-7]+$/.test(octal)) {
+            div_numero.innerHTML = "<b>Erro: Entrada inválida. Insira um número octal.</b>";
+            return;
+        }
+
         var decimal = parseInt(octal, 8);
         var binario = decimal.toString(2);
         var hexa = decimal.toString(16);
 
         div_numero.innerHTML = `
-        <b> Decimal = ${decimal} <br>
-        Binario = ${binario} <br>
-        Hexadecimal = ${hexa} </b>
-        `
+    <b> Decimal = ${decimal} <br>
+    Binario = ${binario} <br>
+    Hexadecimal = ${hexa} </b>
+    `;
     }
+
 
     function base16() {
         var hexa = ipt_numero.value;
-        var decimal = parseInt(hexa, 16)
-        var octal = decimal.toString(8)
-        var binario = decimal.toString(2)
+
+        // Verifica se a string contém apenas dígitos de 0-9 e A-F (ou a-f)
+        if (!/^[0-9A-Fa-f]+$/.test(hexa)) {
+            div_numero.innerHTML = "<b>Erro: Entrada inválida. Insira um número hexadecimal.</b>";
+            return;
+        }
+
+        var decimal = parseInt(hexa, 16);
+        var octal = decimal.toString(8);
+        var binario = decimal.toString(2);
 
         div_numero.innerHTML = `
-        <b> Decimal = ${decimal} <br>
-        Binario = ${binario} <br>
-        Octal = ${octal} </b>
-        `
+    <b> Decimal = ${decimal} <br>
+    Binario = ${binario} <br>
+    Octal = ${octal} </b>
+    `;
     }
+
 </script>
 
 </html>
